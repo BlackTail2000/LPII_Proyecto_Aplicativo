@@ -38,6 +38,7 @@ public class SecurityConfiguration {
 		});
 		
 		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("usuario/mantenimiento/**").hasRole("Administrador");
 			auth.anyRequest().authenticated();
 		});
 		

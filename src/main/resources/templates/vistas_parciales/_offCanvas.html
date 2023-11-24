@@ -1,0 +1,38 @@
+<div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" 
+	 id="offCanvasPrincipal" aria-labelledby="offCanvasPrincipalLabel">
+	<div class="offcanvas-header d-flex justify-content-between">
+		<img class="m-auto" th:src="@{/img/user_icon.png}" style="height: 150px;">
+	</div>
+	<div class="offcanvas-body text-center">
+		<div>
+			<div class="dropdown-center">
+				<button th:text="${usuario.getNomUsua() + ' ' + usuario.getApeUsua() + ' '}" 
+					    class="btn btn-primary dropdown-toggle" type="button" 
+					    data-bs-toggle="dropdown" aria-expanded="false">
+						
+				</button>
+				<ul class="dropdown-menu">
+					<li><a class="dropdown-item" th:href="@{/usuario/tuCuenta}"><i class="bi bi-person-fill"></i> Tu Cuenta</a></li>
+					<li><a class="dropdown-item" th:href="@{/usuario/cambiarContrasena}"><i class="bi bi-fingerprint"></i> Cambiar Contraseña</a></li>
+					<li><hr class="dropdown-divider"></li>
+					<li><a class="dropdown-item" th:href="@{/logout}"><i class="bi bi-door-open-fill"></i> Cerrar Sesión</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="mt-5">
+			<div class="hover-overlay py-2">
+				<a class="text-decoration-none" th:href="@{/}">
+					<h4 class="text-center"><i class="bi bi-house"></i> Inicio</h4>
+				</a>
+			</div>
+			<th:block th:if="${usuario.getRol().getNomRol().equals('Administrador')}">
+				<div class="hover-overlay py-2">
+					<a class="text-decoration-none" th:href="@{/usuario/mantenimiento}">
+						<h4 class="text-center"><i class="bi bi-person-gear"></i> Usuarios</h4>
+					</a>
+				</div>
+			</th:block>
+			
+		</div>
+	</div>
+</div>

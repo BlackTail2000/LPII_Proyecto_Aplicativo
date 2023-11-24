@@ -1,5 +1,11 @@
 package com.smv.mejoracontinua.service.interfaces;
 
-public interface IRolService {
+import java.util.List;
 
+import com.smv.mejoracontinua.models.Rol;
+
+public interface IRolService {
+	
+	List<Rol> listarRolesOrdenadosPorNombre();
+	Rol encontrarPorCodigo(int codRol);
 }

@@ -37,7 +37,7 @@ Insert Into Rol Values
 (null, 'Activador');
 
 Insert Into Usuario Values
-('USUA001', 'Carlos Gabriel', 'Baca Manrique', '$2a$10$ypJLZy7gu5FVCxpdZPPt6eIdec3Vd.6AzDsSR4.q8DeJwm0l0E44O', 'cgbm2000@gmail.com',
+('USUA001', 'Carlos Gabriel', 'Baca Manrique', '$2a$10$ypJLZy7gu5FVCxpdZPPt6eIdec3Vd.6AzDsSR4.q8DeJwm0l0E44O', 'i202212089@cibertec.edu.pe',
 1, '2000-09-19', Now(), null, 1);
 
 Select * From Usuario;
