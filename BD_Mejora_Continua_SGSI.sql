@@ -12,12 +12,32 @@ nom_usua Varchar(100),
 ape_usua Varchar(100),
 clv_usua Char(60),
 email_usua Varchar(70),
-est_usua TinyInt(1),
+est_usua TinyInt,
 fec_nac Date,
 fec_registro DateTime,
 ult_login DateTime,
 cod_rol Int Not Null,
 Foreign Key (cod_rol) References Rol (cod_rol));
+
+Create Table Implementador(
+cod_impl Int Primary Key Auto_Increment,
+nom_impl Varchar(100),
+ape_impl Varchar(100),
+email_impl Varchar(70),
+tel_impl Varchar(30),
+est_impl TinyInt,
+fec_nac Date,
+fec_contrato Date);
+
+Create Table Control_Seguridad(
+cod_control Int Primary Key Auto_Increment,
+nom_control Varchar(100),
+des_control LongText,
+categoria Varchar(50),
+fecha_impl Date,
+est_control Varchar(20),
+cod_responsable Int,
+Foreign Key (cod_responsable) References Implementador (cod_impl));
 
 Create Table Empleado(
 cod_emp Int Primary Key Auto_Increment,
@@ -25,7 +45,7 @@ nom_emp Varchar(100),
 ape_emp Varchar(100),
 email_emp Varchar(70),
 tel_emp Varchar(30),
-est_emp TinyInt(1),
+est_emp TinyInt,
 fec_nac Date,
 fec_contrato Date);
 

@@ -26,7 +26,7 @@ public class Empleado {
 	@Column(name = "tel_emp", length = 30)
 	private String telEmp;
 	
-	@Column(name = "est_emp", columnDefinition = "TINYINT(1)")
+	@Column(name = "est_emp", columnDefinition = "TINYINT")
 	private int estEmp;
 	
 	@Column(name = "fec_nac", columnDefinition = "DATE")

@@ -25,7 +25,7 @@ public class Usuario {
 	@Column(name = "email_usua", length = 70)
 	private String emailUsua;
 	
-	@Column(name = "est_usua", columnDefinition = "TINYINT(1)")
+	@Column(name = "est_usua", columnDefinition = "TINYINT")
 	private int estUsua;
 	
 	@Column(name = "fec_nac", columnDefinition = "DATE")
