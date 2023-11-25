@@ -44,6 +44,13 @@
 					</a>
 				</div>
 			</th:block>
+			<th:block th:if="${usuario.getRol().getNomRol().equals('Director de Realización')}">
+				<div class="hover-overlay py-2">
+					<a class="text-decoration-none" th:href="@{/controlSeguridad/asignarImplementador}">
+						<h4 class="text-center"><i class="bi bi-folder2-open"></i> Consultar Controles de Seguridad</h4>
+					</a>
+				</div>
+			</th:block>
 		</div>
 	</div>
 </div>

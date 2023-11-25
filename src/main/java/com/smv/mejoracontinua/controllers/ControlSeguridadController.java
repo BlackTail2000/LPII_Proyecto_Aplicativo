@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smv.mejoracontinua.models.ControlSeguridad;
+import com.smv.mejoracontinua.models.Implementador;
 import com.smv.mejoracontinua.service.interfaces.IControlSeguridadService;
+import com.smv.mejoracontinua.service.interfaces.IImplementadorService;
 import com.smv.mejoracontinua.service.interfaces.IUsuarioService;
 
 @Controller
@@ -27,6 +29,8 @@ public class ControlSeguridadController {
 	private IUsuarioService usuarioServ;
 	@Autowired
 	private IControlSeguridadService controlSeguridadServ;
+	@Autowired
+	private IImplementadorService implementadorServ;
 
 	@GetMapping("/mantenimiento")
 	public String mantenimientoControlSeguridad(Model model) {
@@ -56,5 +60,35 @@ public class ControlSeguridadController {
 	public ResponseEntity<String> eliminarControl(@PathVariable("codControl") int codControl){
 		controlSeguridadServ.eliminarControlSeguridad(codControl);
 		return ResponseEntity.ok("Control de Seguridad eliminado");
+	}
+	
+	@GetMapping("/asignarImplementador")
+	public String asignarImplementador(Model model) {
+		model.addAttribute("usuario", usuarioServ.obtenerUsuarioLogueado());
+		return "controlSeguridad/asignar_implementador";
+	}
+	
+	@GetMapping("/asignarImplementador/listarTodos")
+	@ResponseBody
+	public List<ControlSeguridad> listarControlesDeSeguridadParaAsignacion(){
+		return controlSeguridadServ.encontrarTodos();
+	}
+	
+	@GetMapping("/asignarImplementador/buscar/implementadores/{busqueda}")
+	@ResponseBody
+	public List<Implementador> buscarImplementadores(@PathVariable("busqueda") String busqueda){
+		return implementadorServ.encontrarPorNombresOApellidosYPorSuEstado(busqueda, 1);
+	}
+	
+	@PutMapping("/asignarImplementador/{codControl}/{codImpl}")
+	public ResponseEntity<String> asignarImplementador(@PathVariable("codControl") int codControl, @PathVariable("codImpl") int codImpl){
+		controlSeguridadServ.asignarImplementador(codControl, codImpl);
+		return ResponseEntity.ok("Implementador asignado");
+	}
+	
+	@PutMapping("/asignarImplementador/desasignar/{codControl}")
+	public ResponseEntity<String> desasignarImplementador(@PathVariable("codControl") int codControl){
+		controlSeguridadServ.desasignarImplementador(codControl);
+		return ResponseEntity.ok("Implementador desasignado");
 	}
 }

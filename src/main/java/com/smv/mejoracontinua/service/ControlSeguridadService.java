@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.smv.mejoracontinua.models.ControlSeguridad;
+import com.smv.mejoracontinua.models.Implementador;
 import com.smv.mejoracontinua.repositories.IControlSeguridadRepository;
 import com.smv.mejoracontinua.service.interfaces.IControlSeguridadService;
+import com.smv.mejoracontinua.service.interfaces.IImplementadorService;
 import com.smv.mejoracontinua.util.FechaUtil;
 
 @Service
@@ -16,6 +18,8 @@ public class ControlSeguridadService implements IControlSeguridadService {
 
 	@Autowired
 	private IControlSeguridadRepository controlSeguridadRepos;
+	@Autowired
+	private IImplementadorService implementadorServ;
 	
 	@Autowired
 	private FechaUtil fechaUtil;
@@ -60,6 +64,21 @@ public class ControlSeguridadService implements IControlSeguridadService {
 	@Override
 	public void eliminarControlSeguridad(int codControl) {
 		controlSeguridadRepos.deleteById(codControl);
+	}
+
+	@Override
+	public ControlSeguridad asignarImplementador(int codControl, int codImpl) {
+		ControlSeguridad controlSeguridad = this.encontrarPorCodigo(codControl);
+		Implementador implementador = implementadorServ.encontrarPorCodigo(codImpl);
+		controlSeguridad.setResponsable(implementador);
+		return this.guardarControlSeguridad(controlSeguridad);
+	}
+
+	@Override
+	public ControlSeguridad desasignarImplementador(int codControl) {
+		ControlSeguridad controlSeguridad = this.encontrarPorCodigo(codControl);
+		controlSeguridad.setResponsable(null);
+		return this.guardarControlSeguridad(controlSeguridad);
 	}
 
 }

@@ -11,6 +11,8 @@ public interface IControlSeguridadService {
 	ControlSeguridad guardarControlSeguridad(ControlSeguridad controlSeguridad);
 	ControlSeguridad registrarControlSeguridad(ControlSeguridad controlSeguridad);
 	ControlSeguridad actualizarControlSeguridad(ControlSeguridad controlSeguridad);
+	ControlSeguridad asignarImplementador(int codControl, int codImpl);
+	ControlSeguridad desasignarImplementador(int codControl);
 	void eliminarControlSeguridad(int codControl);
 	
 	ControlSeguridad encontrarPorCodigo(int codControl);

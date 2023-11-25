@@ -11,4 +11,6 @@ import com.smv.mejoracontinua.models.Implementador;
 public interface IImplementadorRepository extends JpaRepository<Implementador, Integer> {
 
 	List<Implementador> findAllByEstImpl(int estImpl);
+	
+	List<Implementador> findAllByNomImplContainingOrApeImplContainingAndEstImpl(String nomImpl, String apeImpl, int estImpl);
 }

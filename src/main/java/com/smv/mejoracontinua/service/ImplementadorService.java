@@ -54,4 +54,9 @@ public class ImplementadorService implements IImplementadorService {
 		this.guardarImplementador(implementador);
 	}
 
+	@Override
+	public List<Implementador> encontrarPorNombresOApellidosYPorSuEstado(String nomApe, int estImpl) {
+		return implementadorRepos.findAllByNomImplContainingOrApeImplContainingAndEstImpl(nomApe, nomApe, estImpl);
+	}
+
 }
