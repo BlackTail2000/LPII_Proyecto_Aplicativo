@@ -15,9 +15,9 @@ function ListarControles(controlData){
 					$('<td class="text-center">').text(control.nomControl),
 					$('<td class="text-center">').text(control.categoria),
 					$('<td class="text-center">').text(control.fechaImpl),
-					control.responsable != null ?
-					$('<td class="text-center">').text(control.responsable.nomImpl + " " + control.responsable.apeImpl) :
-					$('<td class="text-center">').text("Sin responsable"),
+					control.trabajador != null ?
+					$('<td class="text-center">').text(control.trabajador.nomTrab + " " + control.trabajador.apeTrab) :
+					$('<td class="text-center">').text("Sin Implementador"),
 					$('<td class="text-center">').append(
 						$('<button class="btn btn-outline-info btn-ver-control">')
 						.data("dataControl", control).append(
@@ -113,9 +113,12 @@ $(document).on("click", ".btn-ver-control", function() {
 	$("#verFechaImpl").val(control.fechaImpl);
 	$("#verEstControl").val(control.estControl);
 	
-	control.responsable != null ?
-	$("#btn-ver-implementador").prop("disabled", true) :
-	$("#btn-ver-implementador").prop("disabled", true);
+	$("#verImplementador").val(control.trabajador == null ? "Sin Implementador" : control.trabajador.nomTrab + " " + control.trabajador.apeTrab);
+	$("#verEmailImpl").val(control.trabajador == null ? "Sin Implementador" : control.trabajador.emailTrab);
+	$("#verTelImpl").val(control.trabajador == null ? "Sin Implementador" : control.trabajador.telTrab);
+	$("#verEstImpl").val(control.trabajador == null ? "Sin Implementador" : control.trabajador.estTrab == 1 ? "Activo" : "Inactivo");
+	$("#verFecNac").val(control.trabajador == null ? "Sin Implementador" : control.trabajador.fecNac);
+	$("#verFecContrato").val(control.trabajador == null ? "Sin Implementador" : control.trabajador.fecContrato);
 	
 	$("#modal-ver-control").modal("show");
 })

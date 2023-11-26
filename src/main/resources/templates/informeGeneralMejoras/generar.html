@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Generar Informe General de Mejoras</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+      rel="stylesheet" 
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+      crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+<style>
+	.hover-overlay:hover{
+		background-color: white;
+		color: black;
+	}
+</style>
+</head>
+<body style="background-image: url(https://png.pngtree.com/thumb_back/fh260/background/20211118/pngtree-blue-round-technology-dashboard-image_908916.jpg);
+             background-repeat: no-repeat;
+             background-size: cover;">
+    <nav th:replace="~{vistas_parciales/_navbarPrincipal :: nav}"></nav>
+    <div class="p-5">
+		<div class="p-5 bg-white rounded">
+			<h1>Solicitudes de Acción de Mejoras</h1>
+			<hr>
+			<table id="tablaSolicitudes" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="text-center">Nro.</th>
+						<th class="text-center">Fecha</th>
+						<th class="text-center">Solicitante</th>
+						<th class="text-center">Resp. Ánalisis</th>
+						<th class="text-center">Solicitud</th>
+						<th class="text-center">Estado</th>
+						<th class="text-center">Inf. General</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div th:replace="~{vistas_parciales/_offCanvas :: div}"></div>
+    <div class="modal fade" id="modal-ver-trabajador" tabindex="-1" aria-labelledby="modal-ver-trabajador-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modal-ver-trabajador-label"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label class="form-label">Nombres:</label>
+						<input class="form-control" id="verTrabajador" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Email:</label>
+						<input class="form-control" id="verEmailTrab" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Teléfono:</label>
+						<input class="form-control" id="verTelTrab" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Estado:</label>
+						<input class="form-control" id="verEstTrab" disabled>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">
+						<i class="bi bi-check-circle"></i> Aceptar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal-generar-informe" tabindex="-1" aria-labelledby="modal-generar-informe-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5 text-center" id="modal-generar-informe-label">Generar Informe General de Mejoras</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="numSoli">
+					<div class="mb-3">
+						<label class="form-label" for="objetivo">Objetivo:</label>
+						<textarea class="form-control" id="objetivo" style="height: 150px;"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="areaEspecifica">Área Específica:</label>
+						<textarea class="form-control" id="areaEspecifica" style="height: 150px;"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="mejoraImplementada">Mejora Implementada:</label>
+						<textarea class="form-control" id="mejoraImplementada" style="height: 150px;"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="descripcionImplementacion">Implementación:</label>
+						<textarea class="form-control" id="descripcionImplementacion" style="height: 150px;"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="resultadosPrueba">Resultados:</label>
+						<textarea class="form-control" id="resultadosPrueba" style="height: 150px;"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="recomendacionesAdicionales">Recomendaciones Adicionales:</label>
+						<textarea class="form-control" id="recomendacionesAdicionales" style="height: 150px;"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="conclusiones">Conclusiones:</label>
+						<textarea class="form-control" id="conclusiones" style="height: 150px;"></textarea>
+					</div>
+					<h3 class="text-primary text-center">Implementador</h3>
+					<div class="mb-3">
+						<label class="form-label" for="buscarImpl">Buscar:</label>
+						<input class="form-control" id="buscarImpl" type="text" autocomplete="off" placeholder="Ingresar nombres...">
+					</div>
+					<table id="tablaImplementadores" class="table table-bordered table-striped my-3">
+						<thead>
+							<tr>
+								<th class="text-center">Implementador</th>
+								<th class="text-center">Seleccionar</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+						</tbody>
+					</table>
+					<input type="hidden" id="codImpl">
+					<div class="mb-3">
+						<label class="form-label">Implementador:</label>
+						<input class="form-control" id="verImpl" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Email:</label>
+						<input class="form-control" id="verEmailImpl" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Teléfono:</label>
+						<input class="form-control" id="verTelImpl" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Estado:</label>
+						<input class="form-control" id="verEstImpl" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Fecha de Nacimiento:</label>
+						<input class="form-control" id="verFecNacImpl" disabled>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Fecha de Contrato:</label>
+						<input class="form-control" id="verFecContratoImpl" disabled>
+					</div>
+					<div class="alert alert-danger text-center" role="alert" id="msjError">
+						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" id="btn-generar-informe"><i class="bi bi-check-circle"></i> Generar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous">
+</script>
+<script th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{/js/sweetalert2.all.min.js}"></script>
+<script th:src="@{/js/informeGeneralMejoras/generar.js}"></script>
+</html>

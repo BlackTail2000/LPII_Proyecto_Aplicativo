@@ -213,8 +213,8 @@ $(document).on("click", ".btn-bloquear, .btn-desbloquear", function() {
 	const usuario = $(this).data("dataUsuario");
 	Swal.fire({
 		title: usuario.estUsua == 1 ? 
-		       "¿Bloquear al usuario Nro. " + usuario.codUsua.substring(4, 7) + " ?" : 
-		       "¿Desbloquear al usuario Nro. " + usuario.codUsua.substring(4, 7) + " ?",
+		       "¿Bloquear al usuario?" : 
+		       "¿Desbloquear al usuario?",
 		icon: "warning",
 		showCancelButton: true,
 		confirmButtonText: "Aceptar",

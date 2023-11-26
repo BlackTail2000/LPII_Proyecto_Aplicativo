@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smv.mejoracontinua.models.ControlSeguridad;
-import com.smv.mejoracontinua.models.Implementador;
+import com.smv.mejoracontinua.models.Trabajador;
 import com.smv.mejoracontinua.service.interfaces.IControlSeguridadService;
-import com.smv.mejoracontinua.service.interfaces.IImplementadorService;
+import com.smv.mejoracontinua.service.interfaces.ITrabajadorService;
 import com.smv.mejoracontinua.service.interfaces.IUsuarioService;
 
 @Controller
@@ -30,7 +30,7 @@ public class ControlSeguridadController {
 	@Autowired
 	private IControlSeguridadService controlSeguridadServ;
 	@Autowired
-	private IImplementadorService implementadorServ;
+	private ITrabajadorService trabajadorServ;
 
 	@GetMapping("/mantenimiento")
 	public String mantenimientoControlSeguridad(Model model) {
@@ -76,8 +76,8 @@ public class ControlSeguridadController {
 	
 	@GetMapping("/asignarImplementador/buscar/implementadores/{busqueda}")
 	@ResponseBody
-	public List<Implementador> buscarImplementadores(@PathVariable("busqueda") String busqueda){
-		return implementadorServ.encontrarPorNombresOApellidosYPorSuEstado(busqueda, 1);
+	public List<Trabajador> buscarImplementadores(@PathVariable("busqueda") String busqueda){
+		return trabajadorServ.busquedaTrabajadores_1(busqueda, 1, "Implementador");
 	}
 	
 	@PutMapping("/asignarImplementador/{codControl}/{codImpl}")

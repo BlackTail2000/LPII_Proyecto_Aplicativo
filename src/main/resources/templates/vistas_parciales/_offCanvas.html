@@ -34,8 +34,8 @@
 			</th:block>
 			<th:block th:if="${usuario.getRol().getNomRol().equals('Activador')}">
 				<div class="hover-overlay py-2">
-					<a class="text-decoration-none" th:href="@{/implementador/mantenimiento}">
-						<h4 class="text-center"><i class="bi bi-person-gear"></i> Implementadores</h4>
+					<a class="text-decoration-none" th:href="@{/trabajador/mantenimiento}">
+						<h4 class="text-center"><i class="bi bi-person-gear"></i> Trabajadores</h4>
 					</a>
 				</div>
 				<div class="hover-overlay py-2">
@@ -48,6 +48,18 @@
 				<div class="hover-overlay py-2">
 					<a class="text-decoration-none" th:href="@{/controlSeguridad/asignarImplementador}">
 						<h4 class="text-center"><i class="bi bi-folder2-open"></i> Consultar Controles de Seguridad</h4>
+					</a>
+				</div>
+				<div class="hover-overlay py-2">
+					<a class="text-decoration-none" th:href="@{/informeGeneralMejoras/generar}">
+						<h4 class="text-center"><i class="bi bi-folder2-open"></i> Consultar Solicitudes de Acción de Mejoras</h4>
+					</a>
+				</div>
+			</th:block>
+			<th:block th:if="${usuario.getRol().getNomRol().equals('Gestor de Seguridad')}">
+				<div class="hover-overlay py-2">
+					<a class="text-decoration-none" th:href="@{/solicitudAccionMejoras/generar}">
+						<h4 class="text-center"><i class="bi bi-file-earmark-text"></i> Generar Solicitud de Acción de Mejoras</h4>
 					</a>
 				</div>
 			</th:block>

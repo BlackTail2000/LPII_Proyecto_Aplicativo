@@ -48,7 +48,7 @@ Order By R.nom_rol Asc, U.cod_usua Asc]]>
 	<variable name="conteoUsuarios" class="java.lang.Integer" resetType="Group" resetGroup="GroupRol" calculation="Count">
 		<variableExpression><![CDATA[$F{codUsua}]]></variableExpression>
 	</variable>
-	<group name="GroupRol">
+	<group name="GroupRol" keepTogether="true">
 		<groupExpression><![CDATA[$F{rol.nomRol}]]></groupExpression>
 		<groupHeader>
 			<band height="20">

@@ -10,7 +10,7 @@ public interface IUsuarioService {
 
 	//Obtener Listados de Usuarios
 	List<Usuario> encontrarTodos();
-	List<Usuario> encontrarTodosExceptoUnRol(String nomRol);
+	List<Usuario> encontrarTodosExceptoUnRolOrdenadosPorCodigo(String nomRol);
 	List<Usuario> encontrarTodosOrdenadosPorRolYCodigo();
 	
 	//Obtener un único Usuario

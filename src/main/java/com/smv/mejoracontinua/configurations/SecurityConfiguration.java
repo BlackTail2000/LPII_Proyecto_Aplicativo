@@ -39,8 +39,11 @@ public class SecurityConfiguration {
 		
 		http.authorizeHttpRequests(auth -> {
 			auth.requestMatchers("usuario/mantenimiento/**").hasRole("Administrador");
-			auth.requestMatchers("implementador/mantenimiento/**").hasRole("Activador");
+			auth.requestMatchers("trabajador/mantenimiento/**").hasRole("Activador");
 			auth.requestMatchers("controlSeguridad/mantenimiento/**").hasRole("Activador");
+			auth.requestMatchers("controlSeguridad/asignarImplementador/**").hasRole("Director de Realización");
+			auth.requestMatchers("solicitudAccionMejoras/generar/**").hasRole("Gestor de Seguridad");
+			auth.requestMatchers("informeGeneralMejoras/generar/**").hasRole("Director de Realización");
 			auth.anyRequest().authenticated();
 		});
 		

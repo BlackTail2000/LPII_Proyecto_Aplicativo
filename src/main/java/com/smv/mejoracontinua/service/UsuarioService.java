@@ -115,8 +115,8 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public List<Usuario> encontrarTodosExceptoUnRol(String nomRol) {
-		return usuarioRepos.findAllByNomRolNot(nomRol);
+	public List<Usuario> encontrarTodosExceptoUnRolOrdenadosPorCodigo(String nomRol) {
+		return usuarioRepos.findAllByNomRolNotOrderByCodUsuaAsc(nomRol);
 	}
 
 	@Override

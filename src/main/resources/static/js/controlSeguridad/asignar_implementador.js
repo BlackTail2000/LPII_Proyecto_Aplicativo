@@ -15,7 +15,7 @@ function ListarControles(controlData){
 					$('<td class="text-center">').text(control.nomControl),
 					$('<td class="text-center">').text(control.categoria),
 					$('<td class="text-center">').text(control.fechaImpl),
-					$('<td class="text-center">').text(control.responsable == null ? "Sin responsable" : control.responsable.nomImpl + " " + control.responsable.apeImpl),
+					$('<td class="text-center">').text(control.trabajador == null ? "Sin Implementador" : control.trabajador.nomTrab + " " + control.trabajador.apeTrab),
 					$('<td class="text-center">').append(
 						$('<button class="btn btn-outline-info btn-ver-control">')
 						.data("dataControl", control).append(
@@ -23,7 +23,7 @@ function ListarControles(controlData){
 						)
 					),
 					$('<td class="text-center">').append(
-						control.responsable == null ?
+						control.trabajador == null ?
 						$('<button class="btn btn-outline-success btn-asignar-implementador">')
 						.data("dataControl", control).append(
 							$('<i class="bi bi-person-add">').text(" Asignar")
@@ -51,7 +51,7 @@ function ListarImplementadores(implementadorData){
 		implementadorData.forEach((implementador) => {
 			$("#tablaImplementadores tbody").append(
 				$("<tr>").append(
-					$('<td class="text-center">').text(implementador.nomImpl + " " + implementador.apeImpl),
+					$('<td class="text-center">').text(implementador.nomTrab + " " + implementador.apeTrab),
 					$('<td class="text-center">').append(
 						$('<button class="btn btn-warning btn-seleccionar">')
 						.data("dataImplementador", implementador).append(
@@ -111,10 +111,10 @@ $(document).on("input keyup", "#buscarImpl", function() {
 $(document).on("click", ".btn-seleccionar", function() {
 	const implementador = $(this).data("dataImplementador");
 	
-	$("#codImpl").val(implementador.codImpl);
-	$("#implementador").val(implementador.nomImpl + " " + implementador.apeImpl);
-	$("#emailImpl").val(implementador.emailImpl);
-	$("#telImpl").val(implementador.telImpl);
+	$("#codImpl").val(implementador.codTrab);
+	$("#implementador").val(implementador.nomTrab + " " + implementador.apeTrab);
+	$("#emailImpl").val(implementador.emailTrab);
+	$("#telImpl").val(implementador.telTrab);
 	$("#fecNac").val(implementador.fecNac);
 	$("#fecContrato").val(implementador.fecContrato);
 })
@@ -182,11 +182,11 @@ $(document).on("click", ".btn-ver-control", function() {
 	$("#verCategoria").val(control.categoria);
 	$("#verFechaImpl").val(control.fechaImpl);
 	$("#verEstControl").val(control.estControl);
-	$("#verImplementador").val(control.responsable == null ? "Sin Implementador asignado" : control.responsable.nomImpl + " " + control.responsable.apeImpl);
-	$("#verEmailImpl").val(control.responsable == null ? "Sin Implementador asignado" : control.responsable.emailImpl);
-	$("#verTelImpl").val(control.responsable == null ? "Sin Implementador asignado" : control.responsable.telImpl);
-	$("#verFecNac").val(control.responsable == null ? "Sin Implementador asignado" : control.responsable.fecNac);
-	$("#verFecContrato").val(control.responsable == null ? "Sin Implementador asignado" : control.responsable.fecContrato);
+	$("#verImplementador").val(control.trabajador == null ? "Sin Implementador asignado" : control.trabajador.nomTrab + " " + control.trabajador.apeTrab);
+	$("#verEmailImpl").val(control.trabajador == null ? "Sin Implementador asignado" : control.trabajador.emailTrab);
+	$("#verTelImpl").val(control.trabajador == null ? "Sin Implementador asignado" : control.trabajador.telTrab);
+	$("#verFecNac").val(control.trabajador == null ? "Sin Implementador asignado" : control.trabajador.fecNac);
+	$("#verFecContrato").val(control.trabajador == null ? "Sin Implementador asignado" : control.trabajador.fecContrato);
 	
 	$("#modal-ver-control-label").html("Control Nro. " + control.codControl);
 	$("#modal-ver-control").modal("show");

@@ -12,7 +12,7 @@ import com.smv.mejoracontinua.models.Usuario;
 public interface IUsuarioRepository extends JpaRepository<Usuario, String> {
 
 	@Query("Select u From Usuario u Where u.rol.nomRol != ?1")
-	List<Usuario> findAllByNomRolNot(String nomRol);
+	List<Usuario> findAllByNomRolNotOrderByCodUsuaAsc(String nomRol);
 	
 	@Query("Select Max(u.codUsua) From Usuario u")
 	String findMaxCodUsua();

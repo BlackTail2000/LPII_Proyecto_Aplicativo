@@ -99,7 +99,7 @@ public class UsuarioController {
 	@GetMapping("/mantenimiento/listarUsuarios")
 	@ResponseBody
 	public List<Usuario> listarUsuariosNoAdministradores(){
-		return usuarioServ.encontrarTodosExceptoUnRol("Administrador");
+		return usuarioServ.encontrarTodosExceptoUnRolOrdenadosPorCodigo("Administrador");
 	}
 	
 	@PostMapping("/mantenimiento/registrar")

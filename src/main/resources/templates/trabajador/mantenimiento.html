@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mantenimiento de Implementadores</title>
+<title>Mantenimiento de Trabajadores</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
       rel="stylesheet" 
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
@@ -21,15 +21,16 @@
     <nav th:replace="~{vistas_parciales/_navbarPrincipal :: nav}"></nav>
     <div class="p-5">
 		<div class="p-5 bg-white rounded">
-			<h1 class="text-center">Mantenimiento de Implementadores</h1>
+			<h1 class="text-center">Mantenimiento de Trabajadores</h1>
 			<hr>
-			<button class="btn btn-outline-success" id="btn-nuevo-implementador"><i class="bi bi-person-add"></i> Nuevo Implementador</button>
-			<table id="tablaImplementadores" class="table table-bordered table-striped mt-3">
+			<button class="btn btn-outline-success" id="btn-nuevo-trabajador"><i class="bi bi-person-add"></i> Nuevo Trabajador</button>
+			<table id="tablaTrabajadores" class="table table-bordered table-striped mt-3">
 				<thead>
 					<tr>
-						<th class="text-center">Implementador</th>
+						<th class="text-center">Trabajador</th>
 						<th class="text-center">Email</th>
 						<th class="text-center">Fecha de Contrato</th>
+						<th class="text-center">Tipo</th>
 						<th colspan="3" class="text-center">Acciones</th>
 					</tr>
 				</thead>
@@ -40,67 +41,73 @@
 		</div>
 	</div>
     <div th:replace="~{vistas_parciales/_offCanvas :: div}"></div>
-    <div class="modal fade" id="modal-implementador" tabindex="-1" aria-labelledby="modal-implementador-label" aria-hidden="true">
+    <div class="modal fade" id="modal-trabajador" tabindex="-1" aria-labelledby="modal-trabajador-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="modal-implementador-label"></h1>
+					<h1 class="modal-title fs-5" id="modal-trabajador-label"></h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="mb-3">
-						<label class="form-label" for="nomImpl">Nombres:</label>
-						<input class="form-control" id="nomImpl" type="text" autocomplete="off" placeholder="Ingresar nombres...">
+						<label class="form-label" for="nomTrab">Nombres:</label>
+						<input class="form-control" id="nomTrab" type="text" autocomplete="off" placeholder="Ingresar nombres...">
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="apeImpl">Apellidos:</label>
-						<input class="form-control" id="apeImpl" type="text" autocomplete="off" placeholder="Ingresar apellidos...">
+						<label class="form-label" for="apeTrab">Apellidos:</label>
+						<input class="form-control" id="apeTrab" type="text" autocomplete="off" placeholder="Ingresar apellidos...">
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="emailImpl">Email:</label>
-						<input class="form-control" id="emailImpl" type="email" autocomplete="off" placeholder="Ingresar email...">
+						<label class="form-label" for="emailTrab">Email:</label>
+						<input class="form-control" id="emailTrab" type="email" autocomplete="off" placeholder="Ingresar email...">
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="telImpl">Teléfono:</label>
-						<input class="form-control" id="telImpl" type="text" autocomplete="off" placeholder="Ingresar teléfono">
+						<label class="form-label" for="telTrab">Teléfono:</label>
+						<input class="form-control" id="telTrab" type="text" autocomplete="off" placeholder="Ingresar teléfono">
 					</div>
 					<div class="mb-3">
 						<label class="form-label" for="fecNac">Fecha de Nacimiento:</label>
 						<input class="form-control" id="fecNac" type="date">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="tipo">Tipo:</label>
+						<select class="form-select" id="tipo">
+							<option value="-1">--Seleccionar una opción--</option>
+						</select>
 					</div>
 					<div class="alert alert-danger text-center" role="alert" id="msjError">
 						
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn" id="btn-guardar-implementador"><i class="bi bi-floppy-fill"></i> Guardar</button>
+					<button class="btn" id="btn-guardar-trabajador"><i class="bi bi-floppy-fill"></i> Guardar</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="modal-ver-implementador" tabindex="-1" aria-labelledby="modal-ver-implementador-label" aria-hidden="true">
+	<div class="modal fade" id="modal-ver-trabajador" tabindex="-1" aria-labelledby="modal-ver-trabajador-label" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="modal-ver-implementador-label">Datos de Implementador</h1>
+					<h1 class="modal-title fs-5" id="modal-ver-trabajador-label">Datos de Trabajador</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div class="mb-3">
-						<label class="form-label" for="verImplementador">Implementador:</label>
-						<input class="form-control" id="verImplementador" disabled>
+						<label class="form-label" for="verTrabajador">Implementador:</label>
+						<input class="form-control" id="verTrabajador" disabled>
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="verEmailImpl">Email:</label>
-						<input class="form-control" id="verEmailImpl" disabled>
+						<label class="form-label" for="verEmailTrab">Email:</label>
+						<input class="form-control" id="verEmailTrab" disabled>
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="verTelImpl">Teléfono:</label>
-						<input class="form-control" id="verTelImpl" disabled>
+						<label class="form-label" for="verTelTrab">Teléfono:</label>
+						<input class="form-control" id="verTelTrab" disabled>
 					</div>
 					<div class="mb-3">
-						<label class="form-label" for="verEstImpl">Estado:</label>
-						<input class="form-control" id="verEstImpl" disabled>
+						<label class="form-label" for="verEstTrab">Estado:</label>
+						<input class="form-control" id="verEstTrab" disabled>
 					</div>
 					<div class="mb-3">
 						<label class="form-label" for="verFecNac">Fecha de Nacimiento:</label>
@@ -125,5 +132,5 @@
 <script th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
 <script th:src="@{/js/sweetalert2.all.min.js}"></script>
 <script th:src="@{/js/validaciones.js}"></script>
-<script th:src="@{/js/implementador/mantenimiento.js}"></script>
+<script th:src="@{/js/trabajador/mantenimiento.js}"></script>
 </html>
